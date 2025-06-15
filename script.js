@@ -3,7 +3,8 @@ import { Conversation } from '@elevenlabs/client';
 const startButton = document.getElementById('startButton');
 const stopButton = document.getElementById('stopButton');
 const waveContainer = document.getElementById('waveContainer');
-const audio = document.getElementById('player');
+
+// ❌ Removed: const audio = document.getElementById('player');
 
 let conversation;
 
@@ -18,9 +19,6 @@ function updateWave(mode) {
   waveContainer.classList.remove('listening', 'speaking');
   waveContainer.classList.add(mode);
 }
-
-audio.onplay = () => updateWave('speaking');
-audio.onended = () => updateWave('listening');
 
 async function startConversation() {
   try {
@@ -43,7 +41,7 @@ async function startConversation() {
         updateWave(null);
       },
       onModeChange: (mode) => {
-        updateWave(mode.mode); // "speaking" or "listening"
+        updateWave(mode.mode); // speaking | listening
       }
     });
   } catch (error) {
